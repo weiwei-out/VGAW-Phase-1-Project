@@ -22,6 +22,7 @@ User Deliverables
 4. As a user, the information should be displayed with highest reviewed restaurants (highest avg. star review) at the top. 
 
 Stretch User Deliverables 
+
 5. As a user, I should have the option recieve a randon recommendation. 
 6. As a user, I should be able to change the filters to control how results are ranked. Additional ranking options:
     a. Discount results by distance: the further away, the lower the ranking. 
