@@ -1,14 +1,18 @@
 * {
-    font-family:'Times New Roman', Times, serif
+    font-family:'Raleway', "Raleway";
  }
   
  body {
-    background-color: rgb(136, 136, 136);
+    background-color: rgb(120, 100, 85);
     text-align:center;
-    color:rgb(91,209,215)
+    color:rgb(77,77,86);
+    margin: auto;
  }
  h3 {
-    color:silver
+   color:rgb(78,179,230);
+ }
+ h2 {
+   color:rgb(78,179,230);
  }
  .search-input-wrapper {
     display:flex;
@@ -16,10 +20,10 @@
     align-items: center;
  }
  img {
-    border: 1px solid #ddd;
+    border: none;
     border-radius: 4px;
     padding: 5px;
-    width: 150px;
+    width: 400px;
   }
   search-button {
     border: none;
@@ -29,7 +33,6 @@
     cursor: pointer;
     transition: color 300ms;
   }
-  
-  img {
-     border: none;
-  }
+  /* div {
+     width: 400px;
+  } */

@@ -43,8 +43,9 @@ function randomDrink(){
         IMAGE.src = sht["strDrinkThumb"];
 
         //Set INGREDIENTS
+
         document.getElementById("INGREDIENTS").textContent = "Ingredients";
-        
+        LIST.innerHTML = "";
         for (let i = 0; i < 16; i++) {
             let item = document.createElement('li');
             item.textContent = sht[`strIngredient${i}`];
@@ -85,6 +86,7 @@ function searchDrink(event){
 
         //Set INGREDIENTS
         document.getElementById("INGREDIENTS").textContent = "Ingredients";
+        LIST.innerHTML = "";
         let sht = data["drinks"][0];
         for (let i = 0; i < 16; i++) {
             let item = document.createElement('li');
