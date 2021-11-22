@@ -1,11 +1,3 @@
-/*
-1.LOGO - Flatiron Lounge
-2.TITLE - drink name
-3.IMAGE - default or drink image
-4.CONTENT - about drink
-5.SEARCH - search bar
-6.RANDOM - randomize button 
-*/
 const randomAPI = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 const searchAPI = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 
@@ -13,28 +5,29 @@ const searchAPI = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 const TITLE = document.getElementById("TITLE");
 const IMAGE = document.getElementById("IMAGE");
 const CONTENT = document.getElementById("CONTENT");
+const LIST = document.getElementById("list");
 const RANDOM = document.getElementById("RAND");
 const SEARCH = document.getElementById('SEARCH');
 const INSTRUCT = document.getElementById("INSTRUCTIONS");
-
+const LOGO = document.getElementById("LOGO");
+const Leo = document.getElementById("Leo");
+// const COMMENT = document.getElementById("COMMENT");
 
 function init(){
-    //Initialize Default Page
-    renderPage();
+    //Initialize LOGO
+    document.getElementById("LOGO").src = "./logo.png";
 
     //Add Click Event for Randomize Button 
     RANDOM.addEventListener("click", randomDrink);
 
     //Add Search Functionality
     SEARCH.addEventListener("submit", searchDrink);
-    
-};
 
-function renderPage(){
-    //Set Logo
-    document.getElementById("LOGO").src = "./logo.png";
-};
+    //Add Hover Event to show Leonardo DeCaprio 
+    LOGO.addEventListener("mouseover", hiLeo);
+    LOGO.addEventListener("mouseleave", byeLeo)
 
+};
 
 function randomDrink(){
     fetch(randomAPI)
@@ -42,14 +35,27 @@ function randomDrink(){
         .then(populate)
 
     function populate(data){
-        sht = data["drinks"][0];
+        let sht = data["drinks"][0];
         //Set TITLE = Name of Drink
         TITLE.textContent = sht["strDrink"];
 
         //Set IMAGE = Picture of Drink
         IMAGE.src = sht["strDrinkThumb"];
 
-        //Set CONTENT = Instructions 
+        //Set INGREDIENTS
+        document.getElementById("INGREDIENTS").textContent = "Ingredients";
+        
+        for (let i = 0; i < 16; i++) {
+            let item = document.createElement('li');
+            item.textContent = sht[`strIngredient${i}`];
+            if (item.textContent == ""){
+                console.log("Null");
+            } else {
+                LIST.appendChild(item);
+            }
+          }
+
+        //Set INSTRUCTIONS
         CONTENT.textContent = sht["strInstructions"];
 
         //Turn on Instructions Title h3
@@ -77,13 +83,33 @@ function searchDrink(event){
         //Set IMAGE = Picture of Drink
         IMAGE.src = tmp["strDrinkThumb"];
 
-        //Set CONTENT = Instructions 
+        //Set INGREDIENTS
+        document.getElementById("INGREDIENTS").textContent = "Ingredients";
+        let sht = data["drinks"][0];
+        for (let i = 0; i < 16; i++) {
+            let item = document.createElement('li');
+            item.textContent = sht[`strIngredient${i}`];
+            if (item.textContent == ""){
+                console.log("Null");
+            } else {
+                LIST.appendChild(item);
+            }
+          }
+
+        //Set INSTRUCTIONS
         CONTENT.textContent = tmp["strInstructions"];
 
         //Turn on Instructions Title h3
-        INSTRUCT.textContent = "Instructions"
+        INSTRUCT.textContent = "Instructions"        
     }
 };
 
+function hiLeo(){
+    Leo.src = "https://media2.giphy.com/media/g9582DNuQppxC/giphy.gif?cid=ecf05e47n0d1ivxyvdy7su3rb9r3y11fon7w5da4txil7qca&rid=giphy.gif&ct=g"
+}
 
+function byeLeo(){
+    Leo.src = "";
+}
+    
 init();
