@@ -1,107 +1,89 @@
-// const API = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-// fetch(API)
-//     .then(response => response.json())
-//     .then(data => console.log(data))
-
-//------------------------------------------------------------------------
-
 /*
-1. Cocktail Search Bar 
-2. Randomize Button
-3. Image
-4. Logo
+1.LOGO - Flatiron Lounge
+2.TITLE - drink name
+3.IMAGE - default or drink image
+4.CONTENT - about drink
+5.SEARCH - search bar
+6.RANDOM - randomize button 
 */
+const randomAPI = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+const searchAPI = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 
 
+const TITLE = document.getElementById("TITLE");
+const IMAGE = document.getElementById("IMAGE");
+const CONTENT = document.getElementById("CONTENT");
+const RANDOM = document.getElementById("RAND");
+const SEARCH = document.getElementById('SEARCH');
+const INSTRUCT = document.getElementById("INSTRUCTIONS");
 
 
 function init(){
-    renderImage();
-    randomDrink();
-    searchDrink();
+    //Initialize Default Page
+    renderPage();
+
+    //Add Click Event for Randomize Button 
+    RANDOM.addEventListener("click", randomDrink);
+
+    //Add Search Functionality
+    SEARCH.addEventListener("submit", searchDrink);
+    
 };
 
-function renderImage(){
-    //Set Title
-    document.getElementById("TITLE").textContent = "Flatiron Lounge";
+function renderPage(){
     //Set Logo
     document.getElementById("LOGO").src = "./logo.png";
-    //Set Image 
-    document.getElementById("IMAGE").src = "./defaultImage.png";
 };
+
 
 function randomDrink(){
-    document.getElementById("RANDOM").addEventListener("click", cb);
+    fetch(randomAPI)
+        .then(response => response.json())
+        .then(populate)
 
-    function cb(){
-        const API = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
-        fetch(API)
-            .then(response => response.json())
-            .then(data => console.log(data))
+    function populate(data){
+        sht = data["drinks"][0];
+        //Set TITLE = Name of Drink
+        TITLE.textContent = sht["strDrink"];
+
+        //Set IMAGE = Picture of Drink
+        IMAGE.src = sht["strDrinkThumb"];
+
+        //Set CONTENT = Instructions 
+        CONTENT.textContent = sht["strInstructions"];
+
+        //Turn on Instructions Title h3
+        INSTRUCT.textContent = "Instructions"
     }
 }
 
-function searchDrink(){
-    document.getElementById("SEARCH").addEventListener("submit", cb);
+function searchDrink(event){
+    //Store Intake
+    let intake; 
+    event.preventDefault();
+    intake = SEARCH.children[0].value; 
+    // console.log(intake);
 
-    function cb(){
-        const searchAPI = `URL ${submit}`;
-        fetch(searchAPI)
-            .then(response => response.json())
-            .then(data => console.log(data))
+    fetch(searchAPI + intake)
+        .then(response => response.json())
+        .then(populate)
+    
+    function populate(data){
+        tmp = data["drinks"][0];
+
+        //Set TITLE = Name of Drink
+        TITLE.textContent = tmp["strDrink"];
+
+        //Set IMAGE = Picture of Drink
+        IMAGE.src = tmp["strDrinkThumb"];
+
+        //Set CONTENT = Instructions 
+        CONTENT.textContent = tmp["strInstructions"];
+
+        //Turn on Instructions Title h3
+        INSTRUCT.textContent = "Instructions"
     }
-}
-
-
-
-
-
-
-
-
-
-//------------------------------------------------------------------------
-//API Setup 
-const API = "http://localhost:3000/images/1";
-
-fetch(API)
-    //Convert to JSON
-    .then(res => res.json())
-    //Run renderImage immediately 
-    .then(renderImage);
-
-let count = 0;
-function renderImage(image){
-    //Set Title = image.title (string from db.json)
-    document.getElementById("card-title").textContent = image.title;
-    //Set Image = image.image (string from db.json with file location of image)
-    document.getElementById("card-image").src = image.image;
-    //Set Likes = 0 (value from db.json)
-    document.getElementById("like-count").textContent = `${count} Likes`;
-
-
-    //Reference Like Button and create Event Listener that calls Callback Function
-    document.getElementById("like-button").addEventListener("click", likesCount);
-
-    //Callback Function increments count and sets the content of like-count = '# Likes'
-    function likesCount(){
-        ++ count;
-        document.getElementById("like-count").textContent = `${count} Likes`;
-    };
-
-    //Declare var for Comments List 
-    const commentsList = document.getElementById("comments-list");
-    //Clear out text in Comments Section 
-    commentsList.innerHTML = "";
-    //forEach on all "comments" key within "image"
-    image.comments.forEach(comment => {
-        //Create var and set it as a list item
-        const listItem = document.createElement('li');
-        //listItem = <li>textContent</li> 
-        listItem.textContent = comment.content;
-        //Append to commentsList 
-        commentsList.append(listItem);
-    });
 };
 
-document.getElementById('comment-form').addEventListener("submit", submit)
+
+init();

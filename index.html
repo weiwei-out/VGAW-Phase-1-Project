@@ -1,44 +1,58 @@
 <!--
-1. Create Header
-2. Review Requirement
-3. Number of Reviews Requirement
-4. Current Location
-5. Radius
-6. Restaurant Template
+1.LOGO - Flatiron Lounge
+2.TITLE - drink name
+3.IMAGE - default or drink image
+4.CONTENT - about drink
+5.SEARCH - search bar
+6.RANDOM - randomize button 
 -->
 
 <!DOCTYPE html>
 <html>
-   <!--1. Create Header -->
    <head>
-       <title>Flatiron Lounge</title>
+       <title>Welcome to Flatiron Lounge</title>
        <link rel="stylesheet" type="text/css" href="styles.css" />
        <script defer type="text/javascript" src="/index.js"></script>
    </head>
    <body>
-       <h1>Flatiron Lounge </h1>
-       <div id= "content"></div>
-       <!-- logo -->
-       <img id= "logo"
-       class="logo"
-       src="https://github.com/weiwei-out/VGAW-Phase-1-Project/blob/main/defaultImage.png?raw=true" />
-   </div>
-       <p>This is where the description of the drink will go!</p>
-       <h3>Search Bar</h3>
-   <form id= "search-bar" class="search-bar" >
-       <input
-       class="search-bar"
-       type="text"
-       name="search"
-       id="search-bar"
-       placeholder="Search for your drink..."
-     />
-     <button class="random-button" type="randomize" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"</button>
-       <li rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-           <div>class= "search-icon"</div>
-           <i class="fal fa-search"></i>
+       <!--LOGO-->
+       <div class="LOGO" >
+           <img id="LOGO" >
+       </div>
+       <div class="container">
+           <!--TITLE-->
+           <h2 id="TITLE">"Reality is an illusion that occurs due to lack of alcohol." ~ Anonymous</h2>
+           <!--IMAGE-->
+           <img id="IMAGE" src="./defaultImage.png" class="IMAGE"/>
+           <!--CONTENT-->
+           <h3 id="INSTRUCTIONS"></h3>
+           <p id="CONTENT"></p>
+           <!--SEARCH-->
+           <div class="Search_Drink" >
+                <h3>Search Bar</h3>
+                <form id= "SEARCH" >
+                    <input
+                    class="search-bar"
+                    type="text"
+                    name="search"
+                    placeholder="Search for your drink..."
+                    /> 
+                    <button id="searchButton" type="submit">Search</button>
+                </form>
+           </div>
+           <!--RANDOM-->
+           <div class="Randomizer" >
+                    <button id="RAND" type="click">I'm feeling lucky!</button>
+                </form>
+           </div>
+       </div>
    </body>
 </html>
+
+
+
+
+    
 
 
 
