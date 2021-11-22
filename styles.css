@@ -1,0 +1,31 @@
+* {
+    font-family:'Times New Roman', Times, serif
+ }
+  
+ body {
+    background-color: rgb(136, 136, 136);
+    text-align:center;
+    color:rgb(91,209,215)
+ }
+ h3 {
+    color:silver
+ }
+ .search-input-wrapper {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+ }
+ img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+  }
+  search-button {
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgb(92, 114, 238);
+    cursor: pointer;
+    transition: color 300ms;
+  }
